@@ -413,13 +413,13 @@ export default class AuthenticationClient extends EventEmitter {
 				return {
 					websiteId: 'Mobile',
 					headers: {
-						'user-agent': this._mobileDeviceProperties.mobileUserAgent ?? 'okhttp/3.12.12',
-						cookie: `mobileClient=${this._mobileDeviceProperties.osType === -600 ? 'ios' : 'android' }; mobileClientVersion=${this._mobileDeviceProperties.mobileClientVersion ?? '777777 3.0.0'}`
+						'user-agent': this._mobileDeviceProperties?.mobileUserAgent ?? 'okhttp/3.12.12',
+						cookie: `mobileClient=${this._mobileDeviceProperties?.osType === -600 ? 'ios' : 'android' }; mobileClientVersion=${this._mobileDeviceProperties?.mobileClientVersion ?? '777777 3.0.0'}`
 					},
 					deviceDetails: {
-						device_friendly_name: this._mobileDeviceProperties.deviceFriendlyName ?? 'Galaxy S22',
+						device_friendly_name: this._mobileDeviceProperties?.deviceFriendlyName ?? 'Galaxy S22',
 						platform_type: EAuthTokenPlatformType.MobileApp,
-						os_type: this._mobileDeviceProperties.osType ?? EOSType.AndroidUnknown,
+						os_type: this._mobileDeviceProperties?.osType ?? EOSType.AndroidUnknown,
 						gaming_device_type: 528 // dunno
 					}
 				};
