@@ -270,6 +270,8 @@ event is emitted.
         the machine name that you want to report to Steam when logging on. If omitted, a machine name will automatically
         be generated in the format `DESKTOP-ABCDEFG`. Auto-generated machine IDs are always the same on the same machine
         (it's based on the hash of your actual machine's hostname)
+      - `mobileDeviceProperties` - Changes the standard user-agent, OS, and mobile app version data to its own.
+      	In the absence of custom data, the account can be banned.
 
 You can only use one of `localAddress`, `httpProxy`, `socksProxy` or `agent` at the same time. If you try to use more
 than one of them, an Error will be thrown.
