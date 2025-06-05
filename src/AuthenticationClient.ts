@@ -79,7 +79,6 @@ export default class AuthenticationClient extends EventEmitter {
 		this._transport = options.transport;
 		this._platformType = options.platformType;
 		this._webClient = options.webClient;
-		this._mobileDeviceProperties = options.mobileDeviceProperties;
 		this._webUserAgent = options.webUserAgent;
 		if (this._platformType == EAuthTokenPlatformType.WebBrowser) {
 			this._webClient.userAgent = options.webUserAgent;
