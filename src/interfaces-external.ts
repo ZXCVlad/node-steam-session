@@ -13,6 +13,7 @@ import EAuthSessionGuardType from './enums-steam/EAuthSessionGuardType';
 import EAuthTokenPlatformType from './enums-steam/EAuthTokenPlatformType';
 import EAuthSessionSecurityHistory from './enums-steam/EAuthSessionSecurityHistory';
 import ITransport from './transports/ITransport';
+import { MobileDeviceProperties } from './IMobileDeviceProperties.type';
 
 export interface ConstructorOptions {
 	/**
@@ -70,6 +71,8 @@ export interface ConstructorOptions {
 	 * a random machine name in the format DESKTOP-ABCDEFG will be generated automatically.
 	 */
 	machineFriendlyName?: string;
+
+	mobileDeviceProperties?: MobileDeviceProperties;
 }
 
 export interface StartLoginSessionWithCredentialsDetails {

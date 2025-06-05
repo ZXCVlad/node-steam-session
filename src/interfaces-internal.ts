@@ -6,6 +6,7 @@ import EAuthSessionSecurityHistory from './enums-steam/EAuthSessionSecurityHisto
 import {CAuthentication_DeviceDetails} from './protobuf-generated/types';
 import ITransport from './transports/ITransport';
 import {HttpClient} from '@doctormckay/stdlib/http';
+import { MobileDeviceProperties } from './IMobileDeviceProperties.type';
 
 export interface PlatformData {
 	headers: any;
@@ -20,6 +21,7 @@ export interface AuthenticationClientConstructorOptions {
 	webUserAgent: string;
 	machineId?: Buffer|boolean;
 	clientFriendlyName?: string;
+	mobileDeviceProperties?: MobileDeviceProperties;
 }
 
 export interface StartAuthSessionRequest {

@@ -52,6 +52,7 @@ import {
 	StartAuthSessionWithQrResponse,
 	SubmitSteamGuardCodeRequest
 } from './interfaces-internal';
+import { MobileDeviceProperties } from './IMobileDeviceProperties.type';
 
 const debug = createDebug('steam-session:AuthenticationClient');
 
@@ -71,13 +72,14 @@ export default class AuthenticationClient extends EventEmitter {
 	_webUserAgent: string;
 	_machineId?: Buffer|boolean;
 	_clientFriendlyName?: string;
+	_mobileDeviceProperties?: MobileDeviceProperties;
 
 	constructor(options: AuthenticationClientConstructorOptions) {
 		super();
 		this._transport = options.transport;
 		this._platformType = options.platformType;
 		this._webClient = options.webClient;
-
+		this._mobileDeviceProperties = options.mobileDeviceProperties;
 		this._webUserAgent = options.webUserAgent;
 		if (this._platformType == EAuthTokenPlatformType.WebBrowser) {
 			this._webClient.userAgent = options.webUserAgent;
@@ -85,6 +87,8 @@ export default class AuthenticationClient extends EventEmitter {
 
 		this._machineId = options.machineId;
 		this._clientFriendlyName = options.clientFriendlyName;
+
+		this._mobileDeviceProperties = options.mobileDeviceProperties;
 	}
 
 	async getRsaKey(accountName: string): Promise<CAuthentication_GetPasswordRSAPublicKey_Response> {
@@ -410,13 +414,13 @@ export default class AuthenticationClient extends EventEmitter {
 				return {
 					websiteId: 'Mobile',
 					headers: {
-						'user-agent': 'okhttp/3.12.12',
-						cookie: 'mobileClient=android; mobileClientVersion=777777 3.0.0'
+						'user-agent': this._mobileDeviceProperties.mobileUserAgent ?? 'okhttp/3.12.12',
+						cookie: `mobileClient=${this._mobileDeviceProperties.osType === -600 ? 'ios' : 'android' }; mobileClientVersion=${this._mobileDeviceProperties.mobileClientVersion ?? '777777 3.0.0'}`
 					},
 					deviceDetails: {
-						device_friendly_name: 'Galaxy S22',
+						device_friendly_name: this._mobileDeviceProperties.deviceFriendlyName ?? 'Galaxy S22',
 						platform_type: EAuthTokenPlatformType.MobileApp,
-						os_type: EOSType.AndroidUnknown,
+						os_type: this._mobileDeviceProperties.osType ?? EOSType.AndroidUnknown,
 						gaming_device_type: 528 // dunno
 					}
 				};
